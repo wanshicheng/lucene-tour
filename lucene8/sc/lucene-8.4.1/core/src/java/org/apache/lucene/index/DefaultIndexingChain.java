@@ -67,14 +67,14 @@ final class DefaultIndexingChain extends DocConsumer {
   // NOTE: I tried using Hash Map<String,PerField>
   // but it was ~2% slower on Wiki and Geonames with Java
   // 1.7.0_25:
-  private PerField[] fieldHash = new PerField[2];
+  private PerField[] fieldHash = new PerField[2]; // 存储的是某个DWPT线程存储的所有文档中的域的信息，flush阶段使用
   private int hashMask = 1;
 
   private int totalFieldCount;
   private long nextFieldGen;
 
   // Holds fields seen in each document
-  private PerField[] fields = new PerField[1];
+  private PerField[] fields = new PerField[1]; // 只存储了一篇文档中的域的信息，index阶段使用
 
   private final Set<String> finishedDocValues = new HashSet<>();
 
